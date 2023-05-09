@@ -1,36 +1,22 @@
 
-## calculate metrics
-## library(pROC)
-#library(dplyr)
-
-#tmp <- metrics1(label = label,pred_p=pred_p)
-
-#library(purrr)
-#
-# i <-c(1:100)
-#
-# a <- list(i)
-#
-# label1 <- list(label)
-# pred_p1 <- list(pred_p)
-#
-#
-# set.seed(123)
-# arg1 <- list(label1,pred_p1,c(1:10))
-#
-# tmp <- arg1 %>% pmap(metrics1)  %>% bind_rows()
 
 #' Title
 #'
 #' @param label true label
 #' @param pred_p predicted prob
 #' @param ... XX redundant para
+#' @param i iteration
 
 #'
 #' @return  mymetrics : dataframe
 #' @export
 #'
 #' @examples
+#' label <-  rbinom(100,size = 1,prob = 0.5)
+#' pred_p  <- runif(100,0,1)
+#' library(dplyr)
+#' library(pROC)
+#' tmp <- point_metrics(label,pred_p,iteration = 100)
 
 
 point_metrics <- function(label = NULL,pred_p=NULL,...,i=NULL){
@@ -124,6 +110,11 @@ point_metrics <- function(label = NULL,pred_p=NULL,...,i=NULL){
 #' @export
 #'
 #' @examples
+#' label <-  rbinom(100,size = 1,prob = 0.5)
+#' pred_p  <- runif(100,0,1)
+#' library(dplyr)
+#' library(pROC)
+#' tmp <- one_metrics(label,pred_p)
 
 
 one_metrics <- function(label = NULL,pred_p=NULL,... ,i=NULL){
@@ -209,13 +200,23 @@ one_metrics <- function(label = NULL,pred_p=NULL,... ,i=NULL){
 #'
 #' @param label true label
 #' @param pred_p predicted prob
-#' @param iteration # of bootstrap iteration, default=1000
+#' @param iteration number of bootstrap iteration, default=1000
 #' @param ... redundant para if any
 #'
 #' @return point and 95% CI dataframe
 #' @export
 #'
 #' @examples
+#' label <-  rbinom(100,size = 1,prob = 0.5)
+#' pred_p  <- runif(100,0,1)
+#' library(dplyr)
+#' library(purrr)
+#' library(pROC)
+#' tmp <- metrics1(label,pred_p,iteration = 100)
+
+
+
+
 metrics1 <- function(label = NULL,pred_p = NULL,iteration=1000,...){
   set.seed(1017)
   label1 <- list(label)
